@@ -33,6 +33,18 @@ public class Flight {
         this.arrivalTime = LocalDateTime.parse(arrivalTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
+    public boolean isEqualToFlight(Flight other) {
+        return  getFrom().getAirport().equals(other.getFrom().getAirport()) &&
+                getFrom().getCountry().equals(other.getFrom().getCountry()) &&
+                getFrom().getCity().equals(other.getFrom().getCity()) &&
+                getTo().getAirport().equals(other.getTo().getAirport()) &&
+                getTo().getCountry().equals(other.getTo().getCountry()) &&
+                getTo().getCity().equals(other.getTo().getCity()) &&
+                getDepartureTime().equals(other.getDepartureTime()) &&
+                getArrivalTime().equals(other.getArrivalTime()) &&
+                getCarrier().equals(other.getCarrier());
+    }
+
     public Long getId() {
         return id;
     }

@@ -20,6 +20,12 @@ public class Airport {
         this.airport = airport;
     }
 
+    public boolean isEqualToAirport(Airport other) {
+        return other.getAirport().toUpperCase().trim().equals(this.getAirport().toUpperCase().trim()) &&
+                this.getCity().toUpperCase().trim().equals(other.getCity().toUpperCase().trim()) &&
+                this.getCountry().toUpperCase().trim().equals(other.getCountry().toUpperCase().trim());
+    }
+
     public String getCountry() {
         return country;
     }

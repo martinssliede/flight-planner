@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlightService {
@@ -41,11 +42,8 @@ public class FlightService {
     }
 
     public Flight fetchFlight(Long id) {
-        Flight returnFlight = flightRepository.fetchFlight(id);
-        if (returnFlight == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return returnFlight;
+        Optional<Flight> returnFlight = flightRepository.findFlight(id);
+        return returnFlight.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public synchronized void deleteFlight(Long id) {
@@ -64,15 +62,6 @@ public class FlightService {
         }
     }
 
-    public Flight findFlightById(Long id) {
-        Flight returnFlight = flightRepository.findById(id);
-        if (returnFlight == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else {
-            return returnFlight;
-        }
-    }
-
     public List<Airport> searchAirport(String search) {
         return flightRepository.searchAirports(search.trim().toLowerCase());
     }
@@ -82,19 +71,10 @@ public class FlightService {
     }
 
     public boolean checkIfSameFlight(Flight flight) {
-        return flightRepository.listFlights().stream().anyMatch(f ->
-                f.getFrom().getAirport().equals(flight.getFrom().getAirport()) &&
-                f.getFrom().getCountry().equals(flight.getFrom().getCountry()) &&
-                f.getFrom().getCity().equals(flight.getFrom().getCity()) &&
-                f.getTo().getAirport().equals(flight.getTo().getAirport()) &&
-                f.getTo().getCountry().equals(flight.getTo().getCountry()) &&
-                f.getTo().getCity().equals(flight.getTo().getCity()) &&
-                f.getDepartureTime().equals(flight.getDepartureTime()) &&
-                f.getArrivalTime().equals(flight.getArrivalTime()) &&
-                f.getCarrier().equals(flight.getCarrier()));
+        return flightRepository.listFlights().stream().anyMatch(f -> f.isEqualToFlight(flight));
     }
     public boolean checkSameAirport(Flight flight) {
-        return flight.getTo().getAirport().toUpperCase().trim().equals(flight.getFrom().getAirport().toUpperCase().trim()) &&       flight.getFrom().getCity().toUpperCase().trim().equals(flight.getTo().getCity().toUpperCase().trim()) &&             flight.getFrom().getCountry().toUpperCase().trim().equals(flight.getTo().getCountry().toUpperCase().trim());
+        return flight.getFrom().isEqualToAirport(flight.getTo());
     }
     public boolean checkIfStrangeDate(Flight flight) {
         return LocalDateTime.parse(flight.getDepartureTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
