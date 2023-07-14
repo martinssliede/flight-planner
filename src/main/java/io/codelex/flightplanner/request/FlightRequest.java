@@ -1,15 +1,11 @@
 package io.codelex.flightplanner.request;
 
-import io.codelex.flightplanner.domain.Airport;
-
-import java.time.LocalDateTime;
-
-public class CreateFlightRequest {
+public class FlightRequest {
     private String from;
     private String to;
     private String departureDate;
 
-    public CreateFlightRequest(String from, String to, String departureDate) {
+    public FlightRequest(String from, String to, String departureDate) {
         this.from = from;
         this.to = to;
         this.departureDate = departureDate;

@@ -3,7 +3,7 @@ package io.codelex.flightplanner;
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
 import io.codelex.flightplanner.domain.Search;
-import io.codelex.flightplanner.request.CreateFlightRequest;
+import io.codelex.flightplanner.request.FlightRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -49,7 +49,7 @@ public class FlightController {
     }
 
     @PostMapping("api/flights/search")
-    public Search searchFlight(@RequestBody CreateFlightRequest request) {
+    public Search searchFlight(@RequestBody FlightRequest request) {
         return flightService.searchFlight(request);
     }
 

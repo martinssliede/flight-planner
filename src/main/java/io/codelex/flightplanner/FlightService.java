@@ -3,8 +3,7 @@ package io.codelex.flightplanner;
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
 import io.codelex.flightplanner.domain.Search;
-import io.codelex.flightplanner.request.CreateFlightRequest;
-import jakarta.validation.Valid;
+import io.codelex.flightplanner.request.FlightRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -53,7 +52,7 @@ public class FlightService {
         flightRepository.deleteFlight(id);
     }
 
-    public Search searchFlight(CreateFlightRequest request) {
+    public Search searchFlight(FlightRequest request) {
         if (request.getFrom() != null && request.getTo() != null && request.getDepartureDate() != null) {
             if (request.getFrom().equals(request.getTo())) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -95,12 +94,12 @@ public class FlightService {
                 f.getCarrier().equals(flight.getCarrier()));
     }
     public boolean checkSameAirport(Flight flight) {
-        return (flight.getTo().getAirport().toUpperCase().trim().equals(flight.getFrom().getAirport().toUpperCase().trim()) &&       flight.getFrom().getCity().toUpperCase().trim().equals(flight.getTo().getCity().toUpperCase().trim()) &&             flight.getFrom().getCountry().toUpperCase().trim().equals(flight.getTo().getCountry().toUpperCase().trim()));
+        return flight.getTo().getAirport().toUpperCase().trim().equals(flight.getFrom().getAirport().toUpperCase().trim()) &&       flight.getFrom().getCity().toUpperCase().trim().equals(flight.getTo().getCity().toUpperCase().trim()) &&             flight.getFrom().getCountry().toUpperCase().trim().equals(flight.getTo().getCountry().toUpperCase().trim());
     }
     public boolean checkIfStrangeDate(Flight flight) {
-        return (LocalDateTime.parse(flight.getDepartureTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+        return LocalDateTime.parse(flight.getDepartureTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
                 .isAfter(LocalDateTime.parse(flight.getArrivalTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))) ||
-                flight.getDepartureTime().equals(flight.getArrivalTime()));
+                flight.getDepartureTime().equals(flight.getArrivalTime());
     }
 
 }

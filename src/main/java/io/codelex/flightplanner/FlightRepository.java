@@ -3,7 +3,7 @@ package io.codelex.flightplanner;
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
 import io.codelex.flightplanner.domain.Search;
-import io.codelex.flightplanner.request.CreateFlightRequest;
+import io.codelex.flightplanner.request.FlightRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class FlightRepository {
         listFlights.removeIf(flight -> flight.getId().equals(id));
     }
 
-    public Search searchFlight(CreateFlightRequest request) {
+    public Search searchFlight(FlightRequest request) {
         List<Flight> items = listFlights.stream().filter(flight -> flight.getFrom().getAirport().equals(request.getFrom()) &&
                 flight.getTo().getAirport().equals(request.getTo()) &&
                 flight.getDepartureTime().substring(0, 10).equals(request.getDepartureDate())).toList();
