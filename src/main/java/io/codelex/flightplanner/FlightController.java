@@ -55,7 +55,7 @@ public class FlightController {
 
     @GetMapping("api/flights/{id}")
     public Flight findFlightById(@PathVariable("id") Long id) {
-        return flightService.findFlightById(id);
+        return flightService.fetchFlight(id);
     }
 
     @GetMapping("api/airports")

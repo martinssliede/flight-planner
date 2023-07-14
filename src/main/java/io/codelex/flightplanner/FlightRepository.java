@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class FlightRepository {
@@ -27,8 +28,8 @@ public class FlightRepository {
         id = 1L;
     }
 
-    public Flight fetchFlight(Long id) {
-        return listFlights.stream().filter(idNew -> id.equals(idNew.getId())).findAny().orElse(null);
+    public Optional <Flight> findFlight(Long id) {
+        return listFlights.stream().filter(flight -> id.equals(flight.getId())).findAny();
     }
 
     public List<Flight> listFlights() {
@@ -46,9 +47,6 @@ public class FlightRepository {
         return new Search(items, 0, items.size());
     }
 
-    public Flight findById(Long id) {
-        return listFlights.stream().filter(idNew -> id.equals(idNew.getId())).findAny().orElse(null);
-    }
 
     public List<Airport> searchAirports(String search) {
         return listFlights.stream().filter(flight -> flight.getFrom().getAirport().toLowerCase().contains(search) ||
