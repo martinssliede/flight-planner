@@ -2,7 +2,6 @@ package io.codelex.flightplanner;
 
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
-import io.codelex.flightplanner.request.CreateFlightRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ class FlightPlannerApplicationTests {
 
 	@Autowired
 	FlightController flightController;
-	@Autowired
-	FlightService flightService;
 	@Autowired
 	FlightRepository flightRepository;
 
@@ -31,5 +28,4 @@ class FlightPlannerApplicationTests {
 		flightController.clearFlights();
 		Assertions.assertTrue(flightRepository.listFlights.isEmpty());
 	}
-
 }
