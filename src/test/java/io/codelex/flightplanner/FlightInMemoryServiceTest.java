@@ -8,19 +8,19 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class FlightServiceTest {
+class FlightInMemoryServiceTest {
 
     @Mock
-    FlightRepository repository;
+    FlightInMemoryRepository repository;
     @InjectMocks
-    FlightService flightService;
+    FlightInMemoryService flightInMemoryService;
     @Captor
     ArgumentCaptor<FlightRequest> flightCaptor;
 
     @Test
     void searchFlight() {
         FlightRequest request = new FlightRequest("RIX", "DXB", "2019-01-01");
-        flightService.searchFlight(request);
+        flightInMemoryService.searchFlight(request);
         Mockito.verify(repository).searchFlight(flightCaptor.capture());
         FlightRequest searchedRequest = flightCaptor.getValue();
         Assertions.assertEquals(request.getTo(), searchedRequest.getTo());

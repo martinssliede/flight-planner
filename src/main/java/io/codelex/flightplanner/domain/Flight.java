@@ -1,6 +1,10 @@
 package io.codelex.flightplanner.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +12,10 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Entity
 public class Flight {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Valid
     @NotNull
@@ -23,6 +30,9 @@ public class Flight {
     private LocalDateTime departureTime;
     @NotNull
     private LocalDateTime arrivalTime;
+
+    public Flight() {
+    }
 
     public Flight(Long id, @NotNull Airport from, @NotNull Airport to, @NotNull String carrier, @NotNull String departureTime, @NotNull String arrivalTime) {
         this.id = id;

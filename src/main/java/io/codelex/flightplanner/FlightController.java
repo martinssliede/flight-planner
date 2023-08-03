@@ -16,50 +16,50 @@ import java.util.List;
 @Validated
 public class FlightController {
 
-    private FlightService flightService;
+    private FlightService flightInMemoryService;
 
-    public FlightController(FlightService flightService) {
-        this.flightService = flightService;
+    public FlightController(FlightService flightInMemoryService) {
+        this.flightInMemoryService = flightInMemoryService;
     }
 
     @PostMapping("/testing-api/clear")
     @ResponseStatus(HttpStatus.OK)
     public void clearFlights() {
-        flightService.clearFlights();
+        flightInMemoryService.clearFlights();
     }
 
     @PutMapping("/admin-api/flights")
     @ResponseStatus(HttpStatus.CREATED)
     public Flight saveFlight(@RequestBody @Valid Flight flight) {
-        return flightService.saveFlight(flight);
+        return flightInMemoryService.saveFlight(flight);
     }
     @GetMapping("/admin-api/flights")
     public List<Flight> getFlight() {
-        return flightService.listFlights();
+        return flightInMemoryService.listFlights();
     }
 
     @GetMapping("/admin-api/flights/{id}")
     public Flight fetchFlight(@PathVariable("id") Long id) {
-        return flightService.fetchFlight(id);
+        return flightInMemoryService.fetchFlight(id);
     }
 
     @DeleteMapping("/admin-api/flights/{id}")
     public void deleteFlight(@PathVariable("id") Long id) {
-        flightService.deleteFlight(id);
+        flightInMemoryService.deleteFlight(id);
     }
 
     @PostMapping("api/flights/search")
     public Search searchFlight(@RequestBody FlightRequest request) {
-        return flightService.searchFlight(request);
+        return flightInMemoryService.searchFlight(request);
     }
 
     @GetMapping("api/flights/{id}")
     public Flight findFlightById(@PathVariable("id") Long id) {
-        return flightService.fetchFlight(id);
+        return flightInMemoryService.fetchFlight(id);
     }
 
     @GetMapping("api/airports")
     public List<Airport> searchAirport(@RequestParam String search) {
-        return flightService.searchAirport(search);
+        return flightInMemoryService.searchAirport(search);
     }
 }
