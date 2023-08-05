@@ -1,4 +1,4 @@
-package io.codelex.flightplanner;
+package io.codelex.flightplanner.Repository;
 
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class FlightInMemoryRepository {
     private Long id = 1L;
 
-    List<Flight> listFlights = new ArrayList<>();
+    public List<Flight> listFlights = new ArrayList<>();
 
     public Flight saveFlight(Flight flight) {
         flight.setId(id);

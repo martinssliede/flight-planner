@@ -3,6 +3,7 @@
 --changeset martins:2
 
 CREATE TABLE airport (
-    id serial PRIMARY KEY,
-    name VARCHAR(255) not null
+    airport VARCHAR(255) not null,
+    city VARCHAR(255) not null,
+    country VARCHAR(255) PRIMARY KEY
 );

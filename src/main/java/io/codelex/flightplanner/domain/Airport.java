@@ -1,8 +1,11 @@
 package io.codelex.flightplanner.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
+@Entity
 public class Airport {
     @NotBlank
     @NotNull
@@ -10,9 +13,13 @@ public class Airport {
     @NotBlank
     @NotNull
     private String city;
+    @Id
     @NotBlank
     @NotNull
     private String country;
+
+    public Airport() {
+    }
 
     public Airport(String country, String city, String airport) {
         this.country = country;

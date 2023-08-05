@@ -1,5 +1,7 @@
 package io.codelex.flightplanner;
 
+import io.codelex.flightplanner.Repository.FlightInMemoryRepository;
+import io.codelex.flightplanner.Service.FlightInMemoryService;
 import io.codelex.flightplanner.request.FlightRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

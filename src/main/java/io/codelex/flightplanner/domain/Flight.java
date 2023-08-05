@@ -1,10 +1,7 @@
 package io.codelex.flightplanner.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,9 +16,11 @@ public class Flight {
     private Long id;
     @Valid
     @NotNull
+    @ManyToOne
     private Airport from;
     @Valid
     @NotNull
+    @ManyToOne
     private Airport to;
     @NotBlank
     @NotNull

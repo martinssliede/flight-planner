@@ -4,5 +4,9 @@
 
 CREATE TABLE flight (
     id serial PRIMARY KEY,
-    name VARCHAR(255) not null
+    airportFrom VARCHAR(255) not null,
+    airportTo VARCHAR(255) not null,
+    carrier VARCHAR(255) not null,
+    departureTime timestamp not null,
+    arrivalTime timestamp not null
 );

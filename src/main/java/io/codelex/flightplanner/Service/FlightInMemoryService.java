@@ -1,5 +1,6 @@
-package io.codelex.flightplanner;
+package io.codelex.flightplanner.Service;
 
+import io.codelex.flightplanner.Repository.FlightInMemoryRepository;
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
 import io.codelex.flightplanner.domain.Search;
@@ -12,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-public class FlightInMemoryService implements FlightService{
+public class FlightInMemoryService implements FlightService {
     FlightInMemoryRepository flightInMemoryRepository;
 
     public FlightInMemoryService(FlightInMemoryRepository flightInMemoryRepository) {
