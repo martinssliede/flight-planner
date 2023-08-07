@@ -1,20 +1,21 @@
-package io.codelex.flightplanner.Repository;
+package io.codelex.flightplanner.service;
 
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
 import io.codelex.flightplanner.domain.Search;
 import io.codelex.flightplanner.request.FlightRequest;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface FlightRepository extends JpaRepository<Flight, Integer> {
+public interface FlightService {
 
-    // ŠEIT VAJAG QUERY??
+    Flight saveFlight(Flight flight);
+
+    void clearFlights();
+
     Flight fetchFlight(Long id);
 
-    void deleteFlightById(Long id);
+    void deleteFlight(Long id);
 
     Search searchFlight(FlightRequest request);
 

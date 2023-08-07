@@ -1,4 +1,4 @@
-package io.codelex.flightplanner.Repository;
+package io.codelex.flightplanner.repository;
 
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
@@ -41,7 +41,8 @@ public class FlightInMemoryRepository {
     }
 
     public Search searchFlight(FlightRequest request) {
-        List<Flight> items = listFlights.stream().filter(flight -> flight.getFrom().getAirport().equals(request.getFrom()) &&
+        List<Flight> items = listFlights.stream().filter(flight ->
+                flight.getFrom().getAirport().equals(request.getFrom()) &&
                 flight.getTo().getAirport().equals(request.getTo()) &&
                 flight.getDepartureTime().substring(0, 10).equals(request.getDepartureDate())).toList();
         return new Search(items, 0, items.size());

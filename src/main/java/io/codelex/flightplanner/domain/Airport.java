@@ -1,22 +1,30 @@
 package io.codelex.flightplanner.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.Objects;
+// Trūkst id??
 @Entity
+@Table(name = "airport")
 public class Airport {
-    @NotBlank
-    @NotNull
-    private String airport;
-    @NotBlank
-    @NotNull
-    private String city;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "airport_id")
+    private Long id;
     @NotBlank
     @NotNull
+    @Column(name = "country")
     private String country;
+    @NotBlank
+    @NotNull
+    @Column(name = "city")
+    private String city;
+    @NotBlank
+    @NotNull
+    @Column(name = "airport")
+    private String airport;
 
     public Airport() {
     }
@@ -64,5 +72,18 @@ public class Airport {
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Airport airport1 = (Airport) o;
+        return Objects.equals(country, airport1.country) && Objects.equals(city, airport1.city) && Objects.equals(airport, airport1.airport);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(country, city, airport);
     }
 }

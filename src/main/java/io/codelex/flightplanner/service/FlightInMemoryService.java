@@ -1,6 +1,6 @@
-package io.codelex.flightplanner.Service;
+package io.codelex.flightplanner.service;
 
-import io.codelex.flightplanner.Repository.FlightInMemoryRepository;
+import io.codelex.flightplanner.repository.FlightInMemoryRepository;
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
 import io.codelex.flightplanner.domain.Search;

@@ -8,32 +8,43 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
+// KAUT KĀDAS ANOTĀCIJAS PIETRŪKST? Pieliku JSon format
 @Entity
+@Table(name = "flight")
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "flight_id")
     private Long id;
     @Valid
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "airport_from")
     private Airport from;
     @Valid
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "airport_to")
     private Airport to;
     @NotBlank
     @NotNull
+    @Column(name = "carrier")
     private String carrier;
     @NotNull
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "departureTime")
     private LocalDateTime departureTime;
     @NotNull
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "arrivalTime")
     private LocalDateTime arrivalTime;
 
     public Flight() {
     }
 
-    public Flight(Long id, @NotNull Airport from, @NotNull Airport to, @NotNull String carrier, @NotNull String departureTime, @NotNull String arrivalTime) {
+    public Flight(Long id, Airport from, Airport to, String carrier, String departureTime, String arrivalTime) {
         this.id = id;
         this.from = from;
         this.to = to;
@@ -103,14 +114,27 @@ public class Flight {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight = (Flight) o;
+        return Objects.equals(id, flight.id) && Objects.equals(from, flight.from) && Objects.equals(to, flight.to) && Objects.equals(carrier, flight.carrier) && Objects.equals(departureTime, flight.departureTime) && Objects.equals(arrivalTime, flight.arrivalTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, from, to, carrier, departureTime, arrivalTime);
+    }
+
+    @Override
     public String toString() {
         return "Flight{" +
                 "id=" + id +
                 ", from=" + from +
                 ", to=" + to +
                 ", carrier='" + carrier + '\'' +
-                ", departureTime='" + departureTime + '\'' +
-                ", arrivalTime='" + arrivalTime + '\'' +
+                ", departureTime='" + departureTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + '\'' +
+                ", arrivalTime='" + arrivalTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + '\'' +
                 '}';
     }
 }

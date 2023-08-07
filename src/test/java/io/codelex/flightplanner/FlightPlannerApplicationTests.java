@@ -1,6 +1,6 @@
 package io.codelex.flightplanner;
 
-import io.codelex.flightplanner.Repository.FlightInMemoryRepository;
+import io.codelex.flightplanner.repository.FlightInMemoryRepository;
 import io.codelex.flightplanner.domain.Airport;
 import io.codelex.flightplanner.domain.Flight;
 import org.junit.jupiter.api.Assertions;
