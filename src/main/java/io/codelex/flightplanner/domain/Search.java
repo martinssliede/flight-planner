@@ -39,11 +39,7 @@ public class Search {
 
     @Override
     public String toString() {
-        return "Search{" +
-                "items=" + items +
-                ", page=" + page +
-                ", totalItems=" + totalItems +
-                '}';
+        return "Search{" + "items=" + items + ", page=" + page + ", totalItems=" + totalItems + '}';
     }
 }
 

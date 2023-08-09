@@ -1,5 +1,6 @@
 package io.codelex.flightplanner.configuration;
 
+import io.codelex.flightplanner.repository.AirportRepository;
 import io.codelex.flightplanner.repository.FlightInMemoryRepository;
 import io.codelex.flightplanner.repository.FlightRepository;
 import io.codelex.flightplanner.service.FlightDatabaseService;
@@ -12,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ServiceConfiguration {
 
-// JĀŅEM ĀRĀ AIRPORT REPOSITORY NO GET DATABASEVERSION?
     @Bean
     @ConditionalOnProperty(prefix = "flight", name = "service.version", havingValue = "in-memory")
     public FlightService getInMemoryVersion(FlightInMemoryRepository flightInMemoryRepository) {
@@ -21,7 +21,7 @@ public class ServiceConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "flight", name = "service.version", havingValue = "database")
-    public FlightService getDatabaseVersion(FlightRepository flightRepository) {
-        return new FlightDatabaseService(flightRepository);
+    public FlightService getDatabaseVersion(FlightRepository flightRepository, AirportRepository airportRepository) {
+        return new FlightDatabaseService(flightRepository, airportRepository);
     }
 }

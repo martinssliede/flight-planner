@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-// KAUT KĀDAS ANOTĀCIJAS PIETRŪKST? Pieliku JSon format
 @Entity
 @Table(name = "flight")
 public class Flight {
@@ -20,12 +19,12 @@ public class Flight {
     private Long id;
     @Valid
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "airport_from")
     private Airport from;
     @Valid
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "airport_to")
     private Airport to;
     @NotBlank
@@ -34,11 +33,11 @@ public class Flight {
     private String carrier;
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    @Column(name = "departureTime")
+    @Column(name = "departure_time")
     private LocalDateTime departureTime;
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    @Column(name = "arrivalTime")
+    @Column(name = "arrival_time")
     private LocalDateTime arrivalTime;
 
     public Flight() {
@@ -54,7 +53,7 @@ public class Flight {
     }
 
     public boolean isEqualToFlight(Flight other) {
-        return  getFrom().getAirport().equals(other.getFrom().getAirport()) &&
+        return getFrom().getAirport().equals(other.getFrom().getAirport()) &&
                 getFrom().getCountry().equals(other.getFrom().getCountry()) &&
                 getFrom().getCity().equals(other.getFrom().getCity()) &&
                 getTo().getAirport().equals(other.getTo().getAirport()) &&
@@ -97,16 +96,16 @@ public class Flight {
         this.carrier = carrier;
     }
 
-    public String getDepartureTime() {
-        return departureTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
     }
 
     public void setDepartureTime(String departureTime) {
         this.departureTime = LocalDateTime.parse(departureTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
-    public String getArrivalTime() {
-        return arrivalTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    public LocalDateTime getArrivalTime() {
+        return arrivalTime;
     }
 
     public void setArrivalTime(String arrivalTime) {

@@ -28,7 +28,7 @@ public class FlightInMemoryRepository {
         id = 1L;
     }
 
-    public Optional <Flight> findFlight(Long id) {
+    public Optional<Flight> findFlight(Long id) {
         return listFlights.stream().filter(flight -> id.equals(flight.getId())).findAny();
     }
 
@@ -44,7 +44,7 @@ public class FlightInMemoryRepository {
         List<Flight> items = listFlights.stream().filter(flight ->
                 flight.getFrom().getAirport().equals(request.getFrom()) &&
                 flight.getTo().getAirport().equals(request.getTo()) &&
-                flight.getDepartureTime().substring(0, 10).equals(request.getDepartureDate())).toList();
+                flight.getDepartureTime().toLocalDate().equals(request.getDepartureDate())).toList();
         return new Search(items, 0, items.size());
     }
 

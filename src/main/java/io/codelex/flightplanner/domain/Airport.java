@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
-// Trūkst id??
+
 @Entity
 @Table(name = "airport")
 public class Airport {
@@ -15,15 +15,12 @@ public class Airport {
     private Long id;
     @NotBlank
     @NotNull
-    @Column(name = "country")
     private String country;
     @NotBlank
     @NotNull
-    @Column(name = "city")
     private String city;
     @NotBlank
     @NotNull
-    @Column(name = "airport")
     private String airport;
 
     public Airport() {
@@ -36,9 +33,7 @@ public class Airport {
     }
 
     public boolean isEqualToAirport(Airport other) {
-        return other.getAirport().toUpperCase().trim().equals(this.getAirport().toUpperCase().trim()) &&
-                this.getCity().toUpperCase().trim().equals(other.getCity().toUpperCase().trim()) &&
-                this.getCountry().toUpperCase().trim().equals(other.getCountry().toUpperCase().trim());
+        return other.getAirport().toUpperCase().trim().equals(this.getAirport().toUpperCase().trim()) && this.getCity().toUpperCase().trim().equals(other.getCity().toUpperCase().trim()) && this.getCountry().toUpperCase().trim().equals(other.getCountry().toUpperCase().trim());
     }
 
     public String getCountry() {
@@ -66,15 +61,6 @@ public class Airport {
     }
 
     @Override
-    public String toString() {
-        return "Airport{" +
-                "airport='" + airport + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -85,5 +71,10 @@ public class Airport {
     @Override
     public int hashCode() {
         return Objects.hash(country, city, airport);
+    }
+
+    @Override
+    public String toString() {
+        return "Airport{" + "airport='" + airport + '\'' + ", city='" + city + '\'' + ", country='" + country + '\'' + '}';
     }
 }

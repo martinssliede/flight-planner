@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 @Validated
 public class FlightController {
-// Nomainu visus servisus uz flightSevice;
     private FlightService flightService;
 
     public FlightController(FlightService flightService) {
@@ -34,6 +33,7 @@ public class FlightController {
     public Flight saveFlight(@RequestBody @Valid Flight flight) {
         return flightService.saveFlight(flight);
     }
+
     @GetMapping("/admin-api/flights")
     public List<Flight> getFlight() {
         return flightService.listFlights();
